@@ -4,8 +4,8 @@ This repository contains acceptance tests to validate the functionality of the G
 
 ## Prerequisites
 
-- Node.js (>= 14.x)
-- NPM or Yarn
+- Node.js (>= 22.x)
+- NPM
 - Playwright
 
 ## Environment Setup
