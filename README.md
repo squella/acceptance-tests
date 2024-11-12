@@ -94,13 +94,7 @@ Ensure all dependencies are installed and environment variables are correctly se
    npx playwright test
    ```
 
-2. **Run a specific test**:
-
-   ```bash
-   npx playwright test tests/api/GitHubUserWorkflow.spec.ts
-   ```
-
-3. **Generate and view the test report**:
+2. **Generate and view the test report**:
 
    After running the tests, view a detailed report using:
 
