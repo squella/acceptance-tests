@@ -2,36 +2,47 @@ name: Playwright Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main, master ]
   pull_request:
-    branches:
-      - main
+    branches: [ main, master ]
 
 jobs:
   test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: '22.9.0'
+          node-version: lts/*
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Set environment variables
+        run: echo "TOKEN=${{ secrets.TOKEN }}" >> $GITHUB_ENV
+        shell: bash
+
+      - run: echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
+        shell: bash
+
+      - run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
+        shell: bash
 
       - name: Run Playwright tests
-        run: npx playwright test
         env:
           TOKEN: ${{ secrets.TOKEN }}
           USERNAME: ${{ secrets.USERNAME }}
           BASE_URL: ${{ secrets.BASE_URL }}
+        run: npx playwright test
 
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
+          retention-days: 30
