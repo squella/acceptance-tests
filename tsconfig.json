@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "@config/*": ["config/*"],
+      "@src/*": ["src/*"],
+      "@abilities/*": ["src/abilities/*"],
+      "@actors/*": ["src/actors/*"],
+      "@interactions/*": ["src/interactions/*"],
+      "@questions/*": ["src/questions/*"],
+      "@tasks/*": ["src/tasks/*"],
+      "@data/*": ["data/*"],
+      "@tests/*": ["tests/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "tests/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
