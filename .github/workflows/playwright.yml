@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright Browsers
+      - name: Install Playwright
         run: npx playwright install --with-deps
 
       - name: Set environment variables
@@ -30,6 +30,9 @@ jobs:
       - run: echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
         shell: bash
 
+      - run: echo "PUBLIC_USER=${{ secrets.PUBLIC_USER }}" >> $GITHUB_ENV
+        shell: bash
+
       - run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
         shell: bash
 
@@ -37,6 +40,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
           USERNAME: ${{ secrets.USERNAME }}
+          PUBLIC_USER=${{ secrets.PUBLIC_USER }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: npx playwright test
 
